@@ -11,6 +11,12 @@ namespace KIDZ_POST.MOB.ViewModels
     public class BaseViewModel : INotifyPropertyChanged
     {
         public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
+        protected readonly IRemoteService remoteService;
+
+        public BaseViewModel()
+        {
+            remoteService = new RemoteService();
+        }
 
         bool isBusy = false;
         public bool IsBusy

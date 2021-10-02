@@ -32,8 +32,13 @@ namespace KIDZ_POST.MOB.ViewModels
 
         private async void OnLoginClicked(object obj)
         {
-            // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
-            await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
+            var isValid = await this.remoteService.Login(username, password);
+
+            if (isValid)
+            {
+                // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
+                await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
+            }
         }
     }
 }
