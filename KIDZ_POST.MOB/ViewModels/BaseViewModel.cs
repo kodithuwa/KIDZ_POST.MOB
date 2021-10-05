@@ -12,10 +12,12 @@ namespace KIDZ_POST.MOB.ViewModels
     {
         public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
         protected readonly IRemoteService remoteService;
+        protected readonly IMessageService messageService;
 
         public BaseViewModel()
         {
             remoteService = new RemoteService();
+            messageService = new MessageService();
         }
 
         bool isBusy = false;

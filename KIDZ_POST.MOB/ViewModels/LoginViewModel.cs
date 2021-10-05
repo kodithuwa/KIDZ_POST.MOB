@@ -1,4 +1,5 @@
-﻿using KIDZ_POST.MOB.Views;
+﻿using KIDZ_POST.MOB.Common;
+using KIDZ_POST.MOB.Views;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -32,12 +33,20 @@ namespace KIDZ_POST.MOB.ViewModels
 
         private async void OnLoginClicked(object obj)
         {
-            var isValid = await this.remoteService.Login(username, password);
+            App.Current.Properties.Clear();
+            var user = await this.remoteService.LoginAsync(username, password);
 
-            if (isValid)
+            if (user != null && user.IsTeacher)
             {
-                // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
-                await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
+
+                App.Current.Properties.Add(ApplicationKeys.TeacherId, user.Id);
+                Application.Current.MainPage = new AppShell();
+
+            }
+            else
+            {
+                Application.Current.MainPage = new AppShellLow();
+
             }
         }
     }

@@ -6,8 +6,33 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="RestSharp" Version="106.12.0" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />  
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="AppShellLow.xaml.cs">
+      <DependentUpon>AppShellLow.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ParentDetailPage.xaml.cs">
+      <DependentUpon>ParentDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\MessageDetailPage.xaml.cs">
+      <DependentUpon>MessageDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\ParentsPage.xaml.cs">
+      <DependentUpon>ParentsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\MessagesPage.xaml.cs">
+      <DependentUpon>MessagesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\NewParentPage.xaml.cs">
+      <DependentUpon>NewParentPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\NewMessagePage.xaml.cs">
+      <DependentUpon>NewMessagePage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>

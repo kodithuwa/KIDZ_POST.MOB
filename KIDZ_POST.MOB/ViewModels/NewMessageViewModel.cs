@@ -1,4 +1,5 @@
-﻿using KIDZ_POST.MOB.Models;
+﻿using KIDZ_POST.MOB.Common;
+using KIDZ_POST.MOB.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,12 +8,12 @@ using Xamarin.Forms;
 
 namespace KIDZ_POST.MOB.ViewModels
 {
-    public class NewItemViewModel : BaseViewModel
+    public class NewMessageViewModel : BaseViewModel
     {
-        private string text;
-        private string description;
+        private string title;
+        private string body;
 
-        public NewItemViewModel()
+        public NewMessageViewModel()
         {
             SaveCommand = new Command(OnSave, ValidateSave);
             CancelCommand = new Command(OnCancel);
@@ -22,20 +23,20 @@ namespace KIDZ_POST.MOB.ViewModels
 
         private bool ValidateSave()
         {
-            return !String.IsNullOrWhiteSpace(text)
-                && !String.IsNullOrWhiteSpace(description);
+            return !String.IsNullOrWhiteSpace(title)
+                && !String.IsNullOrWhiteSpace(body);
         }
 
-        public string Text
+        public new string Title
         {
-            get => text;
-            set => SetProperty(ref text, value);
+            get => title;
+            set => SetProperty(ref title, value);
         }
 
-        public string Description
+        public string Body
         {
-            get => description;
-            set => SetProperty(ref description, value);
+            get => body;
+            set => SetProperty(ref body, value);
         }
 
         public Command SaveCommand { get; }
@@ -49,14 +50,16 @@ namespace KIDZ_POST.MOB.ViewModels
 
         private async void OnSave()
         {
-            Item newItem = new Item()
+            var userid = Convert.ToInt32(App.Current.Properties[ApplicationKeys.TeacherId].ToString());
+            Message newItem = new Message()
             {
-                Id = Guid.NewGuid().ToString(),
-                Text = Text,
-                Description = Description
+                Title  = Title,
+                Body = Body,
+                CreatedTime = DateTime.UtcNow,
+                CreatedById = userid,
             };
 
-            await DataStore.AddItemAsync(newItem);
+            var xx = await messageService.CreateMessageAsync(newItem);
 
             // This will pop the current page off the navigation stack
             await Shell.Current.GoToAsync("..");

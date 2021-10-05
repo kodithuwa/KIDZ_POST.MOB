@@ -7,9 +7,9 @@ using Xamarin.Forms;
 
 namespace KIDZ_POST.MOB
 {
-    public partial class AppShell : Xamarin.Forms.Shell
+    public partial class AppShellLow : Xamarin.Forms.Shell
     {
-        public AppShell()
+        public AppShellLow()
         {
             InitializeComponent();
             Routing.RegisterRoute(nameof(ItemDetailPage), typeof(ItemDetailPage));
@@ -17,9 +17,6 @@ namespace KIDZ_POST.MOB
             Routing.RegisterRoute(nameof(MessagesPage), typeof(MessagesPage));
             Routing.RegisterRoute(nameof(MessageDetailPage), typeof(MessageDetailPage));
             Routing.RegisterRoute(nameof(NewMessagePage), typeof(NewMessagePage));
-            Routing.RegisterRoute(nameof(ParentsPage), typeof(ParentsPage));
-            Routing.RegisterRoute(nameof(ParentDetailPage), typeof(ParentDetailPage));
-            Routing.RegisterRoute(nameof(NewParentPage), typeof(NewParentPage));
         }
 
         private async void OnMenuItemClicked(object sender, EventArgs e)

@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:model="clr-namespace:KIDZ_POST.MOB.Models"
+             x:Class="KIDZ_POST.MOB.Views.MessageDetailPage"
+             Title="{Binding Title}">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Select All"/>
+    </ContentPage.ToolbarItems>
+    <StackLayout Spacing="20" Padding="15">
+        <Label Text="Title:" FontSize="Medium" />
+        <Label Text="{Binding Title}" FontSize="Small"/>
+        <Label Text="Body:" FontSize="Medium" />
+        <Label Text="{Binding Body}" FontSize="Small"/>
+        <CollectionView x:Name="MyListView"  ItemsSource="{Binding UserMessages}"
+                SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Padding="10"  x:DataType="model:UserMessage" Orientation="Horizontal" HorizontalOptions="Center">
+                        <CheckBox IsChecked="{Binding IsActivated}" />
+
+                        <Label Text="{Binding UserFullName}" 
+                            LineBreakMode="NoWrap" 
+                            Style="{DynamicResource ListItemTextStyle}" 
+                            FontSize="16" />
+                       <!-- <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer 
+                                NumberOfTapsRequired="1"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:Messagevi}}, Path=UserMessageTapped}"		
+                                CommandParameter="{Binding .}">
+                            </TapGestureRecognizer>
+                        </StackLayout.GestureRecognizers> -->
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </StackLayout>
+</ContentPage>
