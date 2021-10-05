@@ -50,7 +50,7 @@ namespace KIDZ_POST.MOB.ViewModels
 
         private async void OnSave()
         {
-            var userId = Convert.ToInt32(App.Current.Properties[ApplicationKeys.TeacherId].ToString());
+            var userId = Convert.ToInt32(App.Current.Properties[ApplicationKeys.UserId].ToString());
             var newItem = new Message()
             {
                 Title = Title,

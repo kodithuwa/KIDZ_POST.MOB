@@ -3,6 +3,7 @@ namespace KIDZ_POST.MOB.Common
 {
     public class ApplicationKeys
     {
-        public const string TeacherId = "TeacherId";
+        public const string UserId = "UserId";
+        public const string IsTeacher = "IsTeacher";
     }
 }

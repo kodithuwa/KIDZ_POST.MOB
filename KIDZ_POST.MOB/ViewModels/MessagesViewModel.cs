@@ -34,8 +34,9 @@ namespace KIDZ_POST.MOB.ViewModels
             try
             {
                 Messages.Clear();
-                var userid = Convert.ToInt32(App.Current.Properties[ApplicationKeys.TeacherId].ToString());
-                var items = await messageService.GetAsync(userid);
+                var userid = this.AppUserId;
+                var isTeacher = this.AppIsTeacher;
+                var items = isTeacher? await this.messageService.GetAsync(userid) : await this.messageService.GetUserMessagesAsync(userid);
                 foreach (var x in items)
                 {
                     Messages.Add(x);

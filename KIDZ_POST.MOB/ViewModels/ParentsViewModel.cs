@@ -34,7 +34,7 @@ namespace KIDZ_POST.MOB.ViewModels
             try
             {
                 Parents.Clear();
-                var userid = Convert.ToInt32(App.Current.Properties[ApplicationKeys.TeacherId].ToString());
+                var userid = this.AppUserId;
                 var items = await remoteService.GetParentsAsync(userid);
                 foreach (var x in items)
                 {

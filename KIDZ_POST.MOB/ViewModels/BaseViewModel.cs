@@ -1,4 +1,5 @@
-﻿using KIDZ_POST.MOB.Models;
+﻿using KIDZ_POST.MOB.Common;
+using KIDZ_POST.MOB.Models;
 using KIDZ_POST.MOB.Services;
 using System;
 using System.Collections.Generic;
@@ -33,6 +34,25 @@ namespace KIDZ_POST.MOB.ViewModels
             get { return title; }
             set { SetProperty(ref title, value); }
         }
+
+        public int AppUserId
+        {
+            get
+            {
+                var userId = Convert.ToInt32(App.Current.Properties[ApplicationKeys.UserId].ToString());
+                return userId;
+            }
+        }
+
+        public bool AppIsTeacher
+        {
+            get
+            {
+                var isTeacher = Convert.ToBoolean(App.Current.Properties[ApplicationKeys.IsTeacher].ToString());
+                return isTeacher;
+            }
+        }
+
 
         protected bool SetProperty<T>(ref T backingStore, T value,
             [CallerMemberName] string propertyName = "",

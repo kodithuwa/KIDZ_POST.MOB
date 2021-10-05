@@ -24,6 +24,19 @@ namespace KIDZ_POST.MOB.Services
             return default;
         }
 
+        public async Task<IEnumerable<Message>> GetUserMessagesAsync(int userId)
+        {
+            var client = new RestSharp.RestClient(baseUrl);
+            var request = new RestSharp.RestRequest($"api/message/getusermessages/{userId}", Method.GET);
+            var response = await client.ExecuteAsync(request);
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                var messages = JsonConvert.DeserializeObject<IEnumerable<Message>>(response.Content);
+                return messages;
+            }
+            return default;
+        }
+
         public async Task<Message> GetMessageAsync(int messageId)
         {
             var client = new RestSharp.RestClient(baseUrl);

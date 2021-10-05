@@ -39,12 +39,15 @@ namespace KIDZ_POST.MOB.ViewModels
             if (user != null && user.IsTeacher)
             {
 
-                App.Current.Properties.Add(ApplicationKeys.TeacherId, user.Id);
+                App.Current.Properties.Add(ApplicationKeys.UserId, user.Id);
+                App.Current.Properties.Add(ApplicationKeys.IsTeacher, true);
                 Application.Current.MainPage = new AppShell();
 
             }
             else
             {
+                App.Current.Properties.Add(ApplicationKeys.UserId, user.Id);
+                App.Current.Properties.Add(ApplicationKeys.IsTeacher, false);
                 Application.Current.MainPage = new AppShellLow();
 
             }

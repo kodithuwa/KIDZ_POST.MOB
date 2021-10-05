@@ -9,6 +9,8 @@ namespace KIDZ_POST.MOB.Services
     {
         Task<IEnumerable<Message>> GetAsync(int creatorId );
 
+        Task<IEnumerable<Message>> GetUserMessagesAsync(int userId);
+
         Task<Message> GetMessageAsync(int messageId);
 
         Task<Message> CreateMessageAsync(Message message);

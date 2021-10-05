@@ -62,7 +62,7 @@ namespace KIDZ_POST.MOB.ViewModels
 
         private async void OnSave()
         {
-            var userid = Convert.ToInt32(App.Current.Properties[ApplicationKeys.TeacherId].ToString());
+            var userid = this.AppUserId;
             Parent newItem = new Parent()
             {
                 FirstName = FirstName,
