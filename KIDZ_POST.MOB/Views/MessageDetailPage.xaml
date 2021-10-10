@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:model="clr-namespace:KIDZ_POST.MOB.Models"
              x:Class="KIDZ_POST.MOB.Views.MessageDetailPage"
+             xmlns:Custom="clr-namespace:KIDZ_POST.MOB.CustomControls"
              Title="{Binding Title}">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Select All"/>
@@ -16,23 +17,11 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <StackLayout Padding="10"  x:DataType="model:UserMessage" Orientation="Horizontal" HorizontalOptions="Center">
-                        <CheckBox IsChecked="{Binding IsActivated}" />
-
-                        <Label Text="{Binding UserFullName}" 
-                            LineBreakMode="NoWrap" 
-                            Style="{DynamicResource ListItemTextStyle}" 
-                            FontSize="16" />
-                       <!-- <StackLayout.GestureRecognizers>
-                            <TapGestureRecognizer 
-                                NumberOfTapsRequired="1"
-                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:Messagevi}}, Path=UserMessageTapped}"		
-                                CommandParameter="{Binding .}">
-                            </TapGestureRecognizer>
-                        </StackLayout.GestureRecognizers> -->
+                        <Custom:MessageUser IsActivated="{Binding IsActivated}" UserFullName="{Binding UserFullName}" 
+                                            UserId="{Binding UserId}" MessageId="{Binding MessageId}" UserMessageId="{Binding UserMessageId}" ></Custom:MessageUser>
                     </StackLayout>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-
     </StackLayout>
 </ContentPage>

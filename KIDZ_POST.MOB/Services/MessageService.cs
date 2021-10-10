@@ -24,19 +24,6 @@ namespace KIDZ_POST.MOB.Services
             return default;
         }
 
-        public async Task<IEnumerable<Message>> GetUserMessagesAsync(int userId)
-        {
-            var client = new RestSharp.RestClient(baseUrl);
-            var request = new RestSharp.RestRequest($"api/message/getusermessages/{userId}", Method.GET);
-            var response = await client.ExecuteAsync(request);
-            if (response.StatusCode == HttpStatusCode.OK)
-            {
-                var messages = JsonConvert.DeserializeObject<IEnumerable<Message>>(response.Content);
-                return messages;
-            }
-            return default;
-        }
-
         public async Task<Message> GetMessageAsync(int messageId)
         {
             var client = new RestSharp.RestClient(baseUrl);
@@ -64,6 +51,35 @@ namespace KIDZ_POST.MOB.Services
             return default;
         }
 
+        public async Task<IEnumerable<Message>> GetUserMessagesAsync(int userId)
+        {
+            var client = new RestSharp.RestClient(baseUrl);
+            var request = new RestSharp.RestRequest($"api/message/getusermessages/{userId}", Method.GET);
+            var response = await client.ExecuteAsync(request);
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                var messages = JsonConvert.DeserializeObject<IEnumerable<Message>>(response.Content);
+                return messages;
+            }
+            return default;
+        }
+
+        public async Task<bool> CreateUserMessagesAsync(UserMessage userMessage)
+        {
+            if(userMessage == null)
+            {
+                return default;
+            }
+
+            var userMessages = new List<UserMessage> { userMessage };
+            var client = new RestSharp.RestClient(baseUrl);
+            var request = new RestSharp.RestRequest($"api/message/saveusermessages", Method.GET);
+            request.AddJsonBody(userMessages);
+            var response = await client.ExecuteAsync(request);
+            var result = (response.StatusCode == HttpStatusCode.OK);
+            return result;
+        }
+
         public async Task<IEnumerable<UserMessage>> GetUserMessages(int messageId, int teacherId)
         {
             var client = new RestSharp.RestClient(baseUrl);
@@ -77,6 +93,21 @@ namespace KIDZ_POST.MOB.Services
 
             return default;
         }
+
+        public async Task<bool> DeleteUserMessageAsync(int userMessageId)
+        {
+            if (userMessageId <= 0)
+            {
+                return false;
+            }
+
+            var client = new RestSharp.RestClient(baseUrl);
+            var request = new RestSharp.RestRequest($"api/message/deleteusermessage", Method.DELETE);
+            var response = await client.ExecuteAsync(request);
+            var result = response.StatusCode == HttpStatusCode.OK;
+            return result;
+        }
+
 
     }
 }

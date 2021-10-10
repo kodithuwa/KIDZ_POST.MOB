@@ -22,11 +22,5 @@ namespace KIDZ_POST.MOB.Views
 
             BindingContext = _viewModel = new MessagesViewModel();
         }
-
-        //protected override void OnAppearing()
-        //{
-        //    base.OnAppearing();
-        //    _viewModel.OnAppearing();
-        //}
     }
 }

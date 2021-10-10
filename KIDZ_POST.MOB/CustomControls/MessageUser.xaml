@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:model="clr-namespace:KIDZ_POST.MOB.Models"
+             x:Class="KIDZ_POST.MOB.CustomControls.MessageUser">
+    <ContentView.Content>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <CheckBox IsChecked="{Binding IsActivated}" Grid.Column="0" Grid.Row="0" CheckedChanged="CheckBox_CheckedChanged"/>
+            <Label Text="{Binding UserFullName}" 
+                            LineBreakMode="NoWrap" 
+                            Style="{DynamicResource ListItemTextStyle}" 
+                            FontSize="16"  Grid.Column="1" Grid.Row="0" />
+        </Grid>
+    </ContentView.Content>
+</ContentView>
