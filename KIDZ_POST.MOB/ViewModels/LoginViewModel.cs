@@ -44,6 +44,20 @@ namespace KIDZ_POST.MOB.ViewModels
                 this.IsInternentAvailable = false;
             }
 
+            try
+            {
+                var location = await Geolocation.GetLastKnownLocationAsync();
+
+                if (location != null)
+                {
+                    Console.WriteLine($"Latitude: {location.Latitude}, Longitude: {location.Longitude}, Altitude: {location.Altitude}");
+                }
+            }
+            catch (FeatureNotSupportedException fnsEx)
+            {
+                // Handle not supported on device exception
+            }
+
             App.Current.Properties.Clear();
             var user = await this.remoteService.LoginAsync(username, password);
 
@@ -66,5 +80,8 @@ namespace KIDZ_POST.MOB.ViewModels
 
             }
         }
+
+
+
     }
 }
