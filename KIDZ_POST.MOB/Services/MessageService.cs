@@ -6,11 +6,21 @@ using System.Threading.Tasks;
 using RestSharp;
 using System.Net;
 using Newtonsoft.Json;
+using KIDZ_POST.Data;
+using SQLite;
+
 
 namespace KIDZ_POST.MOB.Services
 {
     public class MessageService : BaseService, IMessageService
     {
+        private SQLiteAsyncConnection localDb;
+
+        public MessageService()
+        {
+            localDb = new SQLiteAsyncConnection("");
+        }
+
         public async Task<IEnumerable<Message>> GetAsync(int creatorId)
         {
             var client = new RestSharp.RestClient(baseUrl);
@@ -107,6 +117,13 @@ namespace KIDZ_POST.MOB.Services
             var result = response.StatusCode == HttpStatusCode.OK;
             return result;
         }
+
+        public async Task<int> CreateMessageLocalAsync(Message message)
+        {
+            var count = await localDb.InsertAsync(message);
+            return count;
+        }
+
 
 
     }

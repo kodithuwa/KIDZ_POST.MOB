@@ -20,5 +20,7 @@ namespace KIDZ_POST.MOB.Services
         Task<bool> CreateUserMessagesAsync(UserMessage userMessage);
 
         Task<bool> DeleteUserMessageAsync(int userMessageId);
+
+        Task<int> CreateMessageLocalAsync(Message message);
     }
 }

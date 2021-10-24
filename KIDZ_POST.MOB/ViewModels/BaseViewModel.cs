@@ -53,6 +53,8 @@ namespace KIDZ_POST.MOB.ViewModels
             }
         }
 
+        public bool IsInternentAvailable { get; set; }
+
 
         protected bool SetProperty<T>(ref T backingStore, T value,
             [CallerMemberName] string propertyName = "",

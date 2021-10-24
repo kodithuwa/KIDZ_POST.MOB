@@ -3,6 +3,7 @@ using KIDZ_POST.MOB.Views;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace KIDZ_POST.MOB.ViewModels
@@ -33,6 +34,16 @@ namespace KIDZ_POST.MOB.ViewModels
 
         private async void OnLoginClicked(object obj)
         {
+            var current = Connectivity.NetworkAccess;
+            if(current == NetworkAccess.Internet)
+            {
+                this.IsInternentAvailable = true;
+            }
+            else
+            {
+                this.IsInternentAvailable = false;
+            }
+
             App.Current.Properties.Clear();
             var user = await this.remoteService.LoginAsync(username, password);
 
@@ -46,8 +57,11 @@ namespace KIDZ_POST.MOB.ViewModels
             }
             else
             {
-                App.Current.Properties.Add(ApplicationKeys.UserId, user.Id);
-                App.Current.Properties.Add(ApplicationKeys.IsTeacher, false);
+                if (user != null)
+                {
+                    App.Current.Properties.Add(ApplicationKeys.UserId, user.Id);
+                    App.Current.Properties.Add(ApplicationKeys.IsTeacher, false);
+                }
                 Application.Current.MainPage = new AppShellLow();
 
             }

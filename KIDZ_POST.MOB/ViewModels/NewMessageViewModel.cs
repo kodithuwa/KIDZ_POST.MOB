@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Input;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace KIDZ_POST.MOB.ViewModels
@@ -50,19 +51,32 @@ namespace KIDZ_POST.MOB.ViewModels
 
         private async void OnSave()
         {
-            var userid = this.AppUserId;
-            Message newItem = new Message()
+            var current = Connectivity.NetworkAccess;
+            if (current == NetworkAccess.Internet)
             {
-                Title  = Title,
-                Body = Body,
-                CreatedTime = DateTime.UtcNow,
-                CreatedById = userid,
-            };
+                var userid = this.AppUserId;
+                Message newItem = new Message()
+                {
+                    Title = Title,
+                    Body = Body,
+                    CreatedTime = DateTime.UtcNow,
+                    CreatedById = userid,
+                };
 
-            var xx = await messageService.CreateMessageAsync(newItem);
 
-            // This will pop the current page off the navigation stack
-            await Shell.Current.GoToAsync("..");
+                await messageService.CreateMessageAsync(newItem);
+            }
+            else
+            {
+                Message newItem = new Message()
+                {
+                    Title = Title,
+                    Body = Body,
+                    CreatedTime = DateTime.UtcNow,
+                };
+                await messageService.CreateMessageLocalAsync(newItem);
+            }
+
         }
     }
 }

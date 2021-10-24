@@ -1,4 +1,5 @@
-﻿using KIDZ_POST.MOB.Services;
+﻿using KIDZ_POST.Data;
+using KIDZ_POST.MOB.Services;
 using KIDZ_POST.MOB.Views;
 using System;
 using Xamarin.Forms;
@@ -13,7 +14,7 @@ namespace KIDZ_POST.MOB
         {
             InitializeComponent();
 
-            DependencyService.Register<MockDataStore>();
+            var db = new KidsPostDatabase("");
             //MainPage = new AppShell();
             MainPage = new LoginPage();
         }
